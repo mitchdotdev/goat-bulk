@@ -11,19 +11,20 @@
 #include <vector>
 //using namespace std; - Use namespaces PER FILE, not in header.
 
-#ifdef SHOPPERS_H_
+//#define SHOPPERS_HF
+#ifdef SHOPPERS_HF
 #include "shoppers.h"
 #endif
 
-#ifdef INVENTORY_H_
+#ifdef INVENTORY_HF
 #include "inventory.h"
 #endif
 
-#ifdef DAILYLOG_H_
+#ifdef DAILYLOG_HF
 #include "dailylog.h"
 #endif
 
-#ifdef MANAGERS_H_
+#ifdef MANAGERS_HF
 #include "managers.h"
 #endif
 
