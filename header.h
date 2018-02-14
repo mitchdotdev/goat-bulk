@@ -7,8 +7,25 @@
 
 #include <iostream>
 #include <iomanip>
-using namespace std;
+#include <fstream>
+#include <vector>
+//using namespace std; - Use namespaces PER FILE, not in header.
 
+#ifdef SHOPPERS_H_
+#include "shoppers.h"
+#endif
+
+#ifdef INVENTORY_H_
+#include "inventory.h"
+#endif
+
+#ifdef DAILYLOG_H_
+#include "dailylog.h"
+#endif
+
+#ifdef MANAGERS_H_
+#include "managers.h"
+#endif
 
 
 
