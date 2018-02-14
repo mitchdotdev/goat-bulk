@@ -1,3 +1,3 @@
 # goat-bulk
 GOAT
-GREATEST OF ALL TIME
+I M MITCHELL, I SUX
