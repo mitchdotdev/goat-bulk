@@ -9,9 +9,10 @@
 #include <iomanip>
 #include <fstream>
 #include <vector>
+
 //using namespace std; - Use namespaces PER FILE, not in header.
 
-//#define SHOPPERS_HF
+#define SHOPPERS_HF
 #ifdef SHOPPERS_HF
 #include "shoppers.h"
 #endif
