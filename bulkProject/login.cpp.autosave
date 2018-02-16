@@ -10,7 +10,7 @@ login::login(QWidget *parent) :
 
 void login::on_bttnLogin_clicked()
 {
-
+    
 }
 
 login::~login()
