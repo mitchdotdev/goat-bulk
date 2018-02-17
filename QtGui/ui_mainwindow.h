@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
@@ -19,8 +20,6 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -29,9 +28,8 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QGroupBox *groupBox;
-    QWidget *widget;
-    QVBoxLayout *verticalLayout;
+    QGroupBox *loginBox;
+    QGridLayout *gridLayout_3;
     QHBoxLayout *horizontalLayout;
     QLabel *label;
     QLineEdit *lineEdit_username;
@@ -40,72 +38,66 @@ public:
     QLineEdit *lineEdit_password;
     QPushButton *pushButton_login;
     QMenuBar *menuBar;
-    QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(571, 532);
+        MainWindow->resize(500, 350);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        groupBox = new QGroupBox(centralWidget);
-        groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(150, 50, 351, 351));
-        widget = new QWidget(groupBox);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(20, 70, 214, 141));
-        verticalLayout = new QVBoxLayout(widget);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        loginBox = new QGroupBox(centralWidget);
+        loginBox->setObjectName(QStringLiteral("loginBox"));
+        loginBox->setGeometry(QRect(90, 30, 301, 171));
+        loginBox->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        gridLayout_3 = new QGridLayout(loginBox);
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setContentsMargins(11, 11, 11, 11);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        label = new QLabel(widget);
+        label = new QLabel(loginBox);
         label->setObjectName(QStringLiteral("label"));
 
         horizontalLayout->addWidget(label);
 
-        lineEdit_username = new QLineEdit(widget);
+        lineEdit_username = new QLineEdit(loginBox);
         lineEdit_username->setObjectName(QStringLiteral("lineEdit_username"));
 
         horizontalLayout->addWidget(lineEdit_username);
 
 
-        verticalLayout->addLayout(horizontalLayout);
+        gridLayout_3->addLayout(horizontalLayout, 0, 0, 1, 1);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        label_2 = new QLabel(widget);
+        label_2 = new QLabel(loginBox);
         label_2->setObjectName(QStringLiteral("label_2"));
 
         horizontalLayout_2->addWidget(label_2);
 
-        lineEdit_password = new QLineEdit(widget);
+        lineEdit_password = new QLineEdit(loginBox);
         lineEdit_password->setObjectName(QStringLiteral("lineEdit_password"));
+        lineEdit_password->setEnabled(true);
 
         horizontalLayout_2->addWidget(lineEdit_password);
 
 
-        verticalLayout->addLayout(horizontalLayout_2);
+        gridLayout_3->addLayout(horizontalLayout_2, 1, 0, 1, 1);
 
-        pushButton_login = new QPushButton(widget);
+        pushButton_login = new QPushButton(loginBox);
         pushButton_login->setObjectName(QStringLiteral("pushButton_login"));
 
-        verticalLayout->addWidget(pushButton_login);
+        gridLayout_3->addWidget(pushButton_login, 2, 0, 1, 1, Qt::AlignRight);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 571, 22));
+        menuBar->setGeometry(QRect(0, 0, 500, 22));
         MainWindow->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(MainWindow);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
@@ -118,9 +110,9 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        groupBox->setTitle(QApplication::translate("MainWindow", "Sign in", nullptr));
+        loginBox->setTitle(QApplication::translate("MainWindow", "Sign in", nullptr));
         label->setText(QApplication::translate("MainWindow", "Username", nullptr));
-        label_2->setText(QApplication::translate("MainWindow", "Password", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "Password ", nullptr));
         pushButton_login->setText(QApplication::translate("MainWindow", "Login", nullptr));
     } // retranslateUi
 

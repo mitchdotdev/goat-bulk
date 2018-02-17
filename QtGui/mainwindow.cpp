@@ -35,12 +35,13 @@ void MainWindow::on_pushButton_login_clicked()
         if( (compUsername == 1) &&
             (compPassword == 1) )
         {
+            //validUser = true;
             cout << "TRUE" << endl;
             break;
         } else {
             cout << "FALSE" << endl;
         }
     }
-
+    //return validUser;
     cout << "end" << endl;
 }
