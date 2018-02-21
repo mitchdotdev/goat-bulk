@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef LOGINWINDOW_H
+#define LOGINWINDOW_H
 
 #include <QMainWindow>
 #include <QWidget>
@@ -13,22 +13,22 @@
 using namespace std;
 
 namespace Ui {
-class MainWindow;
+class LoginWindow;
 }
 
-class MainWindow : public QMainWindow
+class LoginWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    explicit LoginWindow(QWidget *parent = 0);
+    ~LoginWindow();
 
 private slots:
     void on_pushButton_login_clicked();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::LoginWindow *ui;
 };
 
-#endif // MAINWINDOW_H
+#endif // LOGINWINDOW_H

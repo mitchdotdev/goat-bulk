@@ -1,19 +1,19 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "loginwindow.h"
+#include "ui_loginwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
+LoginWindow::LoginWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::LoginWindow)
 {
     ui->setupUi(this);
 }
 
-MainWindow::~MainWindow()
+LoginWindow::~LoginWindow()
 {
     delete ui;
 }
 
-void MainWindow::on_pushButton_login_clicked()
+void LoginWindow::on_pushButton_login_clicked()
 {
     QString username = ui->lineEdit_username->text();
     QString password = ui->lineEdit_password->text();
@@ -21,7 +21,6 @@ void MainWindow::on_pushButton_login_clicked()
     QFile user("usernames.txt");
     QFile pass("passwords.txt");
     int compUsername, compPassword;
-    //bool validUser = false;
 
     if(!user.open(QIODevice::ReadOnly | QIODevice::Text) ||
        !pass.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -36,13 +35,16 @@ void MainWindow::on_pushButton_login_clicked()
         if( (compUsername == 1) &&
             (compPassword == 1) )
         {
-            //validUser = true;
+            //return true;
             cout << "TRUE" << endl;
             break;
         } else {
             cout << "FALSE" << endl;
         }
     }
-    //return validUser;
+    user.close();
+    pass.close();
+    // Put QMessageBox saying that the credentials entered were incorrect try again
     cout << "end" << endl;
+    // return false;
 }

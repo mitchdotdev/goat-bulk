@@ -1,14 +1,14 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-02-20T18:26:21
+# Project created by QtCreator 2018-02-15T18:43:17
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = salesInformation
+TARGET = bulkproject
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -25,15 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        salesInformation.cpp
+    loginwindow.cpp \
+    salesinformation.cpp
 
 HEADERS += \
-        salesInformation.h \
-    datetype.h \
-    salesinfo.h
+    loginwindow.h \
+    salesinformation.h
 
 FORMS += \
-        salesInformation.ui
-
-DISTFILES += \
-    day1.txt
+    loginwindow.ui \
+    salesinformation.ui
