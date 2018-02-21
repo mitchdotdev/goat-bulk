@@ -23,7 +23,8 @@ void MainWindow::on_pushButton_login_clicked()
     int compUsername, compPassword;
     //bool validUser = false;
 
-    if(!user.open(QIODevice::ReadOnly | QIODevice::Text) || !pass.open(QIODevice::ReadOnly | QIODevice::Text))
+    if(!user.open(QIODevice::ReadOnly | QIODevice::Text) ||
+       !pass.open(QIODevice::ReadOnly | QIODevice::Text))
         cout << "FAIL" << endl;
 
     while(!user.atEnd() && !pass.atEnd()) {
