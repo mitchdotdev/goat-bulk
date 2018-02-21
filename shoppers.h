@@ -8,9 +8,10 @@ using namespace std;
 
 class shopper {
 	public:
-		bool getTempMember();
 		void setMembershipNumber(string memNum);
+		bool getTempMember();
 		string getMembershipNumber();
+		void printInfo();
 		shopper(string memName, string memNum, string memType, float totAmtSpt);
 	private:
 		string memberName;
@@ -37,13 +38,19 @@ string shopper::getMembershipNumber() {
 	return membershipNumber;
 }
 
+void shopper::printInfo() {
+	cout << "Member Name:        " << memberName       << endl
+		 << "Membership Number:  " << membershipNumber << endl
+		 << "Membership Type:    " << membershipType   << endl
+		 << "total Amount Spent: " << totalAmountSpent << endl;
+
+}
+
 shopper::shopper(string memName, string memNum, string memType, float totAmtSpt) {
 	memberName 		 = memName;
 	membershipNumber = memNum;
 	membershipType   = memType;
 	totalAmountSpent = totAmtSpt;
 }
-
-
 
 #endif /* SHOPPERS_H_ */

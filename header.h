@@ -12,8 +12,7 @@
 
 //using namespace std; - Use namespaces PER FILE, not in header.
 
-#define SHOPPERS_HF
-#ifdef SHOPPERS_HF
+#ifdef SHOPPERS_H_
 #include "shoppers.h"
 #endif
 
@@ -28,7 +27,5 @@
 #ifdef MANAGERS_HF
 #include "managers.h"
 #endif
-
-
 
 #endif /* HEADER_H_ */
