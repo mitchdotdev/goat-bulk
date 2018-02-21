@@ -87,7 +87,17 @@ void salesInformation()
 		{
 			for(int j = 0; j < amount - i - 1; ++j)
 			{
-				if(inventory[j].getName() > inventory[j + 1].getName())
+				/*if(isupper(inventory[j].getName()[0])    == false ||
+				   isupper(inventory[j + 1].getName()[0] == false)) {
+					if(isupper(inventory[j].getName()[0] == false &&
+					   inventory[j].getName()[0] - 32 > inventory[j+1].getName()[0])) {
+						salesInfo temp;
+						temp = inventory[j];
+						inventory[j] = inventory[j + 1];
+						inventory[j + 1] = temp;
+					}
+				}
+				else */ if(inventory[j].getName() > inventory[j + 1].getName())
 				{
 					salesInfo temp;
 					temp = inventory[j];
