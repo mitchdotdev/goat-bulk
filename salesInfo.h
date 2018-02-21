@@ -10,25 +10,23 @@ using namespace std;
 // salesInfo class
 class salesInfo
 {
-public:
-	// constructs salesInfo members
-	salesInfo();
-	// sets the salesInfo members
-	void setSalesInfo(string, string, double, double, int);
-	// prints sales info
-	void printSalesInfo();
-	// gets the item name
-	string getName();
-	// gets the total revenue
-	double getTotalRevenue();
-
-private:
-	string lastSale;
-	string itemName;
-	double price;
-	double totalRevenue;
-	   int quantity;
-
+	public:
+		// constructs salesInfo members
+		salesInfo();
+		// sets the salesInfo members
+		void setSalesInfo(string, string, double, double, int);
+		// prints sales info
+		void printSalesInfo();
+		// gets the item name
+		string getName();
+		// gets the total revenue
+		double getTotalRevenue();
+	private:
+		string lastSale;
+		string itemName;
+		double price;
+		double totalRevenue;
+		   int quantity;
 };
 
 
