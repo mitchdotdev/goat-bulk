@@ -17,20 +17,22 @@ void testSaveFile()
 	// returns the max array size
 	count = readFile(stringArray, fileName);
 
-	// To see output from the file saved to the array (printFunction)
-	for(int index = 0; index < count; ++index)
-	{
-	    cout << stringArray[index];
-	    cout << endl;
+	//if input file could not be opened
+	if(count != -1) {
+		// To see output from the file saved to the array (printFunction)
+		for(int index = 0; index < count; ++index)
+		{
+		    cout << stringArray[index];
+		    cout << endl;
+		}
+
+
+		// returns the new max array size
+		count = addNew(stringArray, fileName, count);
+
+		// rewrite to the file if their is any changes to existing data (NOT NEW DATA)
+		saveFile(stringArray, fileName , count);
 	}
-
-
-	// returns the new max array size
-	count = addNew(stringArray, fileName, count);
-
-	// rewrite to the file if their is any changes to existing data (NOT NEW DATA)
-	saveFile(stringArray, fileName , count);
-
 }
 
 

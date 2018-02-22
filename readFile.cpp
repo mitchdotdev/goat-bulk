@@ -12,30 +12,38 @@ int readFile(string stringArray[], string fileName)
 	int counter = 0;
 	int index   = 0;
 	ifstream fin;
-	string inputFile;
-
-	// input file
-	inputFile = fileName;
 
 	// converts the input file to c string
-    fin.open(fileName.c_str());
+    fin.open(fileName);
+	while(fin.fail())
+	{
+		cout << "Error - Input file does not exist. Enter any key to continue." << endl;
+		fin.close();
+		fin.clear();
+		fin.ignore(1000,'\n');
+		counter = -1;
+		getline(cin, fileName);
+	}
 
-    // stores the data until the end of the text file and below the MAX SIZE
-    while(fin && index < SIZE)
-    {
-    	  getline(fin, stringArray[index]);
+	if(counter != -1) {
 
-      ++index;
+		// stores the data until the end of the text file and below the MAX SIZE
+		while(fin && index < SIZE)
+		{
+			  getline(fin, stringArray[index]);
 
-      // used to find out the max size
-      ++counter;
-    }
+		  ++index;
 
-    // removes an extra count because of the while loop
-    counter = counter - 1;
+		  // used to find out the max size
+		  ++counter;
+		}
 
-    // closes the file
-    fin.close();
+		// removes an extra count because of the while loop
+		counter = counter - 1;
+
+    	// closes the file
+    	fin.close();
+	}
 
     return counter;
   }

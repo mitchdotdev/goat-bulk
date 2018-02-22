@@ -9,7 +9,7 @@ bool login();
 void testSaveFile();
 void salesInformation();
 
-const bool SKIP_LOGIN = 0;
+const bool SKIP_LOGIN = true;
 
 using namespace std;
 
