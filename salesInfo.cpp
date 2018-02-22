@@ -78,32 +78,37 @@ void salesInformation()
 	// user input for sorting
 	cout << "[1] Sort by Name" << endl;
 	cout << "[2] Sort by Total Revenue" << endl;
-	getline(cin, input);
+    getline(cin, input);
 
 	// sort by name by bubble sort
 	if(input[0] == '1')
 	{
+
 		for(int i = 0; i < amount - 1; ++i)
 		{
 			for(int j = 0; j < amount - i - 1; ++j)
 			{
-				/*if(isupper(inventory[j].getName()[0])    == false ||
-				   isupper(inventory[j + 1].getName()[0] == false)) {
-					if(isupper(inventory[j].getName()[0] == false &&
-					   inventory[j].getName()[0] - 32 > inventory[j+1].getName()[0])) {
-						salesInfo temp;
-						temp = inventory[j];
-						inventory[j] = inventory[j + 1];
-						inventory[j + 1] = temp;
-					}
-				}
-				else */ if(inventory[j].getName() > inventory[j + 1].getName())
-				{
+                if(inventory[j].getName()[0] > 96)
+                {
+                    if(inventory[j].getName()[0] - 32 > inventory[j + 1].getName()[0]) {
+                        salesInfo temp;
+                        temp = inventory[j];
+                        inventory[j] = inventory[j + 1];
+                        inventory[j + 1] = temp;
+                    }
+                } else if(inventory[j].getName() > inventory[j + 1].getName()) {
 					salesInfo temp;
 					temp = inventory[j];
 					inventory[j] = inventory[j + 1];
 					inventory[j + 1] = temp;
-				}
+                } else if(inventory[j+1].getName()[0] > 96) {
+                    if(inventory[j].getName()[0] + 32 > inventory[j + 1].getName()[0]) {
+                        salesInfo temp;
+                        temp = inventory[j];
+                        inventory[j] = inventory[j + 1];
+                        inventory[j + 1] = temp;
+                    }
+                }
 			}
 		}
 	}
