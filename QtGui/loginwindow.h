@@ -1,12 +1,12 @@
 #ifndef LOGINWINDOW_H
 #define LOGINWINDOW_H
 
+#include "menu.h"
 #include <QMainWindow>
 #include <QWidget>
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include <QVector>
 #include <QTextStream>
 #include <QFile>
 
@@ -25,7 +25,7 @@ public:
     ~LoginWindow();
 
 private slots:
-    bool on_pushButton_login_clicked();
+    void on_pushButton_login_clicked();
 
 private:
     Ui::LoginWindow *ui;

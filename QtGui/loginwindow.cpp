@@ -8,47 +8,38 @@ LoginWindow::LoginWindow(QWidget *parent) :
     ui->setupUi(this);
 }
 
-LoginWindow::~LoginWindow()
-{
-    delete ui;
-}
-
-bool LoginWindow::on_pushButton_login_clicked()
+void LoginWindow::on_pushButton_login_clicked()
 {
     QString username = ui->lineEdit_username->text();
     QString password = ui->lineEdit_password->text();
     QString fUsername, fPassword;
     QFile user("usernames.txt");
     QFile pass("passwords.txt");
-    bool exit = false;
     int compUsername, compPassword;
 
     if(!user.open(QIODevice::ReadOnly | QIODevice::Text) ||
        !pass.open(QIODevice::ReadOnly | QIODevice::Text))
         cout << "FAIL" << endl;
-    while(!exit)
-    {
-        while(!user.atEnd() && !pass.atEnd()) {
-            fUsername = user.readLine();
-            fPassword = pass.readLine();
-            compUsername =  QString::compare(fUsername, username);
-            compPassword =  QString::compare(fPassword, password);
+        //QDebug fail message
 
-            if( (compUsername == 1) &&
-                (compPassword == 1) )
-            {
-                cout << "TRUE" << endl;
-                return true;
-                //break;
-            } else {
-                //cout << "FALSE" << endl;
-            }
+    while(!user.atEnd() && !pass.atEnd()) {
+        fUsername = user.readLine();
+        fPassword = pass.readLine();
+        compUsername =  QString::compare(fUsername, username);
+        compPassword =  QString::compare(fPassword, password);
+
+        if( (compUsername == 1) &&
+            (compPassword == 1) )
+        {
+            Menu* menuptr = new Menu(this);
+            this->close();
+            menuptr->show();
         }
-
     }
-    user.close();
-    pass.close();
     // Put QMessageBox saying that the credentials entered were incorrect try again
-    cout << "end" << endl;
-    return false;
+}
+
+LoginWindow::~LoginWindow()
+{
+    delete ui;
 }

@@ -13,10 +13,10 @@ Sales::~Sales()
     delete ui;
 }
 
-void Sales::on_pushButton_clicked()
+void Sales::on_pushButton_back_clicked()
 {
-    close();
     Menu *menuPtr = new Menu(this);
+    this->close();
     menuPtr->show();
 }
 

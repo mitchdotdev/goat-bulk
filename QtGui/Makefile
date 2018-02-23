@@ -52,13 +52,21 @@ OBJECTS_DIR   = ./
 
 SOURCES       = main.cpp \
 		loginwindow.cpp \
-		salesinformation.cpp moc_loginwindow.cpp \
-		moc_salesinformation.cpp
+		salesinfo.cpp \
+		menu.cpp \
+		sales.cpp qrc_menupicture.cpp \
+		moc_loginwindow.cpp \
+		moc_menu.cpp \
+		moc_sales.cpp
 OBJECTS       = main.o \
 		loginwindow.o \
-		salesinformation.o \
+		salesinfo.o \
+		menu.o \
+		sales.o \
+		qrc_menupicture.o \
 		moc_loginwindow.o \
-		moc_salesinformation.o
+		moc_menu.o \
+		moc_sales.o
 DIST          = ../../../Qt/5.11.0/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.11.0/clang_64/mkspecs/qdevice.pri \
 		../../../Qt/5.11.0/clang_64/mkspecs/features/device_config.prf \
@@ -248,9 +256,13 @@ DIST          = ../../../Qt/5.11.0/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.11.0/clang_64/mkspecs/features/yacc.prf \
 		../../../Qt/5.11.0/clang_64/mkspecs/features/lex.prf \
 		bulkproject.pro loginwindow.h \
-		salesinformation.h main.cpp \
+		salesinfo.h \
+		menu.h \
+		sales.h main.cpp \
 		loginwindow.cpp \
-		salesinformation.cpp
+		salesinfo.cpp \
+		menu.cpp \
+		sales.cpp
 QMAKE_TARGET  = bulkproject
 DESTDIR       = 
 TARGET        = bulkproject.app/Contents/MacOS/bulkproject
@@ -264,7 +276,7 @@ EXPORT_ARCH_ARGS = $(foreach arch, $(if $(EXPORT_ACTIVE_ARCHS), $(EXPORT_ACTIVE_
 first: all
 ####### Build rules
 
-$(TARGET): ui_loginwindow.h ui_salesinformation.h $(OBJECTS)  
+$(TARGET): ui_loginwindow.h ui_menu.h ui_sales.h $(OBJECTS)  
 	@test -d bulkproject.app/Contents/MacOS/ || mkdir -p bulkproject.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -457,6 +469,7 @@ Makefile: bulkproject.pro ../../../Qt/5.11.0/clang_64/mkspecs/macx-g++/qmake.con
 		../../../Qt/5.11.0/clang_64/mkspecs/features/yacc.prf \
 		../../../Qt/5.11.0/clang_64/mkspecs/features/lex.prf \
 		bulkproject.pro \
+		menupicture.qrc \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../../Qt/5.11.0/clang_64/lib/QtGui.framework/QtGui.prl \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/QtCore.prl
@@ -650,6 +663,7 @@ Makefile: bulkproject.pro ../../../Qt/5.11.0/clang_64/mkspecs/macx-g++/qmake.con
 ../../../Qt/5.11.0/clang_64/mkspecs/features/yacc.prf:
 ../../../Qt/5.11.0/clang_64/mkspecs/features/lex.prf:
 bulkproject.pro:
+menupicture.qrc:
 ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../../Qt/5.11.0/clang_64/lib/QtGui.framework/QtGui.prl:
 ../../../Qt/5.11.0/clang_64/lib/QtCore.framework/QtCore.prl:
@@ -682,10 +696,11 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents menupicture.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/5.11.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents loginwindow.h salesinformation.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp loginwindow.cpp salesinformation.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents loginwindow.ui salesinformation.ui $(DISTDIR)/
+	$(COPY_FILE) --parents loginwindow.h salesinfo.h menu.h sales.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp loginwindow.cpp salesinfo.cpp menu.cpp sales.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents loginwindow.ui menu.ui sales.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -709,19 +724,27 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_menupicture.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_menupicture.cpp
+qrc_menupicture.cpp: menupicture.qrc \
+		../../../Qt/5.11.0/clang_64/bin/rcc \
+		img/unknown.png
+	/Users/mitchellohair/Qt/5.11.0/clang_64/bin/rcc -name menupicture menupicture.qrc -o qrc_menupicture.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: ../../../Qt/5.11.0/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/usr/bin/g++ -pipe -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk -mmacosx-version-min=10.10 -Wall -W -dM -E -o moc_predefs.h ../../../Qt/5.11.0/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_loginwindow.cpp moc_salesinformation.cpp
+compiler_moc_header_make_all: moc_loginwindow.cpp moc_menu.cpp moc_sales.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_loginwindow.cpp moc_salesinformation.cpp
-moc_loginwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+	-$(DEL_FILE) moc_loginwindow.cpp moc_menu.cpp moc_sales.cpp
+moc_loginwindow.cpp: menu.h \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		salesinfo.h \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QVector \
@@ -735,29 +758,41 @@ moc_loginwindow.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers
 		../../../Qt/5.11.0/clang_64/bin/moc
 	/Users/mitchellohair/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/mitchellohair/Qt/5.11.0/clang_64/mkspecs/macx-g++ -I/Users/mitchellohair/Desktop/goat-bulk/QtGui -I/Users/mitchellohair/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/mitchellohair/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/mitchellohair/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/mitchellohair/Qt/5.11.0/clang_64/lib loginwindow.h -o moc_loginwindow.cpp
 
-moc_salesinformation.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers/QList \
-		../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
-		salesinformation.h \
+moc_menu.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		salesinfo.h \
+		menu.h \
 		moc_predefs.h \
 		../../../Qt/5.11.0/clang_64/bin/moc
-	/Users/mitchellohair/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/mitchellohair/Qt/5.11.0/clang_64/mkspecs/macx-g++ -I/Users/mitchellohair/Desktop/goat-bulk/QtGui -I/Users/mitchellohair/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/mitchellohair/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/mitchellohair/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/mitchellohair/Qt/5.11.0/clang_64/lib salesinformation.h -o moc_salesinformation.cpp
+	/Users/mitchellohair/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/mitchellohair/Qt/5.11.0/clang_64/mkspecs/macx-g++ -I/Users/mitchellohair/Desktop/goat-bulk/QtGui -I/Users/mitchellohair/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/mitchellohair/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/mitchellohair/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/mitchellohair/Qt/5.11.0/clang_64/lib menu.h -o moc_menu.cpp
+
+moc_sales.cpp: ../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		menu.h \
+		salesinfo.h \
+		sales.h \
+		moc_predefs.h \
+		../../../Qt/5.11.0/clang_64/bin/moc
+	/Users/mitchellohair/Qt/5.11.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/mitchellohair/Qt/5.11.0/clang_64/mkspecs/macx-g++ -I/Users/mitchellohair/Desktop/goat-bulk/QtGui -I/Users/mitchellohair/Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/mitchellohair/Qt/5.11.0/clang_64/lib/QtGui.framework/Headers -I/Users/mitchellohair/Qt/5.11.0/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/mitchellohair/Qt/5.11.0/clang_64/lib sales.h -o moc_sales.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_loginwindow.h ui_salesinformation.h
+compiler_uic_make_all: ui_loginwindow.h ui_menu.h ui_sales.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_loginwindow.h ui_salesinformation.h
+	-$(DEL_FILE) ui_loginwindow.h ui_menu.h ui_sales.h
 ui_loginwindow.h: loginwindow.ui \
 		../../../Qt/5.11.0/clang_64/bin/uic
 	/Users/mitchellohair/Qt/5.11.0/clang_64/bin/uic loginwindow.ui -o ui_loginwindow.h
 
-ui_salesinformation.h: salesinformation.ui \
+ui_menu.h: menu.ui \
 		../../../Qt/5.11.0/clang_64/bin/uic
-	/Users/mitchellohair/Qt/5.11.0/clang_64/bin/uic salesinformation.ui -o ui_salesinformation.h
+	/Users/mitchellohair/Qt/5.11.0/clang_64/bin/uic menu.ui -o ui_menu.h
+
+ui_sales.h: sales.ui \
+		../../../Qt/5.11.0/clang_64/bin/uic
+	/Users/mitchellohair/Qt/5.11.0/clang_64/bin/uic sales.ui -o ui_sales.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -767,13 +802,15 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
 main.o: main.cpp loginwindow.h \
+		menu.h \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		salesinfo.h \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QVector \
@@ -782,16 +819,15 @@ main.o: main.cpp loginwindow.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QFile \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/qfile.h \
-		salesinformation.h \
-		../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers/QList \
-		../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 loginwindow.o: loginwindow.cpp loginwindow.h \
+		menu.h \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		salesinfo.h \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt/5.11.0/clang_64/lib/QtCore.framework/Headers/QVector \
@@ -803,19 +839,44 @@ loginwindow.o: loginwindow.cpp loginwindow.h \
 		ui_loginwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o loginwindow.o loginwindow.cpp
 
-salesinformation.o: salesinformation.cpp salesinformation.h \
-		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers/QList \
-		../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
-		ui_salesinformation.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o salesinformation.o salesinformation.cpp
+salesinfo.o: salesinfo.cpp salesinfo.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o salesinfo.o salesinfo.cpp
+
+menu.o: menu.cpp menu.h \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		salesinfo.h \
+		sales.h \
+		ui_menu.h \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QComboBox \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qcombobox.h \
+		../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers/QPixmap \
+		../../../Qt/5.11.0/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o menu.o menu.cpp
+
+sales.o: sales.cpp sales.h \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../Qt/5.11.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		menu.h \
+		salesinfo.h \
+		ui_sales.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sales.o sales.cpp
+
+qrc_menupicture.o: qrc_menupicture.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_menupicture.o qrc_menupicture.cpp
 
 moc_loginwindow.o: moc_loginwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_loginwindow.o moc_loginwindow.cpp
 
-moc_salesinformation.o: moc_salesinformation.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_salesinformation.o moc_salesinformation.cpp
+moc_menu.o: moc_menu.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_menu.o moc_menu.cpp
+
+moc_sales.o: moc_sales.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_sales.o moc_sales.cpp
 
 ####### Install
 

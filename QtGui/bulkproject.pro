@@ -26,12 +26,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
     loginwindow.cpp \
-    salesinformation.cpp
+    salesinfo.cpp \
+    menu.cpp \
+    sales.cpp
 
 HEADERS += \
     loginwindow.h \
-    salesinformation.h
+    salesinfo.h \
+    menu.h \
+    sales.h
 
 FORMS += \
     loginwindow.ui \
-    salesinformation.ui
+    menu.ui \
+    sales.ui
+
+RESOURCES += \
+    menupicture.qrc

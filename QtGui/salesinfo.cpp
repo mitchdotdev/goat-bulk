@@ -1,11 +1,7 @@
-#include "salesinformation.h"
-#include "ui_salesinformation.h"
+#include "salesinfo.h"
 
-salesInformation::salesInformation(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::salesInformation)
+salesinfo::salesinfo()
 {
-    ui->setupUi(this);
     lastSale     = "00/00/0000";
     itemName     = "Milk";
     price        = 9.99;
@@ -13,8 +9,7 @@ salesInformation::salesInformation(QWidget *parent) :
     quantity     = 100;
 }
 
-void salesInformation::setSalesInfo(string date, string name, double priceSale,
-                                    double ttRevenue, int quant)
+void salesinfo::setSalesInfo(string date, string name, double priceSale, double ttRevenue, int quant)
 {
     lastSale     = date;
     itemName     = name;
@@ -23,7 +18,7 @@ void salesInformation::setSalesInfo(string date, string name, double priceSale,
     quantity     = quant;
 }
 
-void salesInformation::printSalesInfo()
+void salesinfo::printSalesInfo()
 {
     // sets for 2 decimals
     cout << fixed << setprecision(2);
@@ -35,17 +30,17 @@ void salesInformation::printSalesInfo()
     cout << endl;
 }
 
-string salesInformation::getName()
+string salesinfo::getName()
 {
     return itemName;
 }
 
-double salesInformation::getTotalRevenue()
+double salesinfo::getTotalRevenue()
 {
     return totalRevenue;
 }
 
-void salesInformation::runSalesInfo()
+void salesinfo::runSalesInfo()
 {
     const int MAX_FILES = 7;
         ifstream invent;               // for reading in the text file
@@ -87,7 +82,7 @@ void salesInformation::runSalesInfo()
             currentInFile++;
         }
 
-        salesInformation inventory[amount];
+        salesinfo inventory[amount];
 
         // sets the constructor with the data from the text file
         currentInFile = 0;
@@ -126,7 +121,6 @@ void salesInformation::runSalesInfo()
         // sort by name by bubble sort
         if(input[0] == '1')
         {
-
             for(int i = 0; i < amount - 1; ++i)
             {
                 for(int j = 0; j < amount - i - 1; ++j)
@@ -134,19 +128,19 @@ void salesInformation::runSalesInfo()
                     if(inventory[j].getName()[0] > 96)
                     {
                         if(inventory[j].getName()[0] - 32 > inventory[j + 1].getName()[0]) {
-                            salesInformation temp;
+                            salesinfo temp;
                             temp = inventory[j];
                             inventory[j] = inventory[j + 1];
                             inventory[j + 1] = temp;
                         }
                     } else if(inventory[j].getName() > inventory[j + 1].getName()) {
-                        salesInformation temp;
+                        salesinfo temp;
                         temp = inventory[j];
                         inventory[j] = inventory[j + 1];
                         inventory[j + 1] = temp;
                     } else if(inventory[j+1].getName()[0] > 96) {
                         if(inventory[j].getName()[0] + 32 > inventory[j + 1].getName()[0]) {
-                            salesInformation temp;
+                            salesinfo temp;
                             temp = inventory[j];
                             inventory[j] = inventory[j + 1];
                             inventory[j + 1] = temp;
@@ -165,7 +159,7 @@ void salesInformation::runSalesInfo()
                 {
                     if(inventory[j].getTotalRevenue() > inventory[j + 1].getTotalRevenue())
                     {
-                        salesInformation temp;
+                        salesinfo temp;
                         temp = inventory[j];
                         inventory[j] = inventory[j + 1];
                         inventory[j + 1] = temp;
@@ -181,7 +175,3 @@ void salesInformation::runSalesInfo()
         }
 }
 
-salesInformation::~salesInformation()
-{
-    delete ui;
-}

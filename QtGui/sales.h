@@ -17,9 +17,8 @@ public:
     ~Sales();
 
 private slots:
-    void on_pushButton_clicked();
-
     void on_comboBox_currentTextChanged(const QString &arg1);
+    void on_pushButton_back_clicked();
 
 private:
     Ui::Sales *ui;
