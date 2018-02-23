@@ -4,6 +4,7 @@
  **********************************************************************/
 #ifndef SHOPPERS_H_
 #define SHOPPERS_H_
+#include "header.h"
 using namespace std;
 
 class shopper {

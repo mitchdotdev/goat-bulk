@@ -40,7 +40,6 @@ salesInfo::salesInfo()
 	quantity     = 100;
 }
 
-// constructor
 void salesInfo::setSalesInfo(string date, string name,
 		             double priceSale, double ttRevenue, int quant)
 {

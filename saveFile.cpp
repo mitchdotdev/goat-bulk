@@ -13,11 +13,8 @@ void saveFile(string stringArray[],string fileName ,int counter)
 	string outputFile;
 	ofstream fout;
 
-	// assigns the file to be used
-	outputFile = fileName;
-
 	// makes it to a c string to be used for fout
-	fout.open(outputFile.c_str());
+	fout.open(fileName);
 
 	// outputs the stored data from the array to the text file
 	for(int index = 0; index < counter; ++index)
