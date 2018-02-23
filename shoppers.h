@@ -4,14 +4,16 @@
  **********************************************************************/
 #ifndef SHOPPERS_H_
 #define SHOPPERS_H_
-#include "header.h"
 using namespace std;
 
 class shopper {
 	public:
-		bool getTempMember();
 		void setMembershipNumber(string memNum);
+		bool getTempMember();
 		string getMembershipNumber();
+		void printInfo();
+		void addShopper();
+		void delShopper();
 		shopper(string memName, string memNum, string memType, float totAmtSpt);
 	private:
 		string memberName;
@@ -38,13 +40,78 @@ string shopper::getMembershipNumber() {
 	return membershipNumber;
 }
 
+void shopper::printInfo() {
+	cout << "Member Name:        " << memberName       << endl
+		 << "Membership Number:  " << membershipNumber << endl
+		 << "Membership Type:    " << membershipType   << endl
+		 << "total Amount Spent: " << totalAmountSpent << endl;
+
+}
+
+void shopper::addShopper() {
+
+	ofstream fout;
+	fout.open("warehouse shoppers.txt", fstream::app);
+
+	fout << endl << memberName
+		 << endl << membershipNumber
+		 << endl << membershipType
+		 << endl << "Date goes here";
+	fout.close();
+}
+
+void shopper::delShopper() {
+	string memberSearchingFor;
+	ifstream fin;
+	ofstream fout;
+	int lines = 0;
+	int lineToDelete = -1;
+
+	cout << "Please enter the member to delete: ";
+	getline(cin, memberSearchingFor);
+
+	cout << "JK, this code isn't implemented yet.\n";
+
+	/*fin.open("warehouse shoppers.txt");
+	while(fin) {
+		lines++;
+	}
+	fin.close();
+
+	string fileContents[lines];
+
+
+	fin.open("warehouse shoppers.txt");
+
+	lines = 0;
+	while(fin) {
+		getline(fin, fileContents[lines]);
+		lines++;
+	}
+	fin.close();
+
+	for(int i = 0; i < lines; i++) {
+		if(memberSearchingFor == fileContents[i]) {
+			lineToDelete = lines;
+		}
+	}
+	fout.open("warehouse shoppers.txt");
+	if(lineToDelete > -1) {
+		for(int b = 0; b < lines; b++) {
+			if(lineToDelete != b     && lineToDelete != b + 1 &&
+			   lineToDelete != b + 2 && lineToDelete != b + 3) {
+				fout << fileContents[b];
+			}
+		}
+	}
+	fout.close();*/
+}
+
 shopper::shopper(string memName, string memNum, string memType, float totAmtSpt) {
 	memberName 		 = memName;
 	membershipNumber = memNum;
 	membershipType   = memType;
 	totalAmountSpent = totAmtSpt;
 }
-
-
 
 #endif /* SHOPPERS_H_ */
