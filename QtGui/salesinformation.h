@@ -22,6 +22,7 @@ public:
     void printSalesInfo();
     string getName(); // returns the item name
     double getTotalRevenue(); // returns total revenue
+    void runSalesInfo();
     ~salesInformation();
 
 private:
