@@ -62,6 +62,7 @@ void shopper::addShopper() {
 
 void shopper::delShopper() {
 	string memberSearchingFor;
+	string temp;
 	ifstream fin;
 	ofstream fout;
 	int lines = 0;
@@ -72,14 +73,14 @@ void shopper::delShopper() {
 
 	cout << "JK, this code isn't implemented yet.\n";
 
-	/*fin.open("warehouse shoppers.txt");
+	fin.open("warehouse shoppers.txt");
 	while(fin) {
+		getline(fin, temp);
 		lines++;
 	}
 	fin.close();
 
 	string fileContents[lines];
-
 
 	fin.open("warehouse shoppers.txt");
 
@@ -92,19 +93,26 @@ void shopper::delShopper() {
 
 	for(int i = 0; i < lines; i++) {
 		if(memberSearchingFor == fileContents[i]) {
-			lineToDelete = lines;
+			lineToDelete = i;
 		}
 	}
 	fout.open("warehouse shoppers.txt");
 	if(lineToDelete > -1) {
-		for(int b = 0; b < lines; b++) {
-			if(lineToDelete != b     && lineToDelete != b + 1 &&
-			   lineToDelete != b + 2 && lineToDelete != b + 3) {
-				fout << fileContents[b];
+		for(int b = 0; b < lines - 1; b++) {
+			if(lineToDelete == b) {
+				b += 3;
+			}
+			else {
+				if(b == 0) {
+					fout << fileContents[b];
+				}
+				else {
+					fout << endl << fileContents[b];
+				}
 			}
 		}
 	}
-	fout.close();*/
+	fout.close();
 }
 
 shopper::shopper(string memName, string memNum, string memType, float totAmtSpt) {
