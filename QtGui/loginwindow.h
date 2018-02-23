@@ -9,6 +9,7 @@
 #include <fstream>
 #include <QTextStream>
 #include <QFile>
+#include <QMessageBox>
 
 using namespace std;
 

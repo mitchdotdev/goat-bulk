@@ -15,7 +15,10 @@ void LoginWindow::on_pushButton_login_clicked()
     QString fUsername, fPassword;
     QFile user("usernames.txt");
     QFile pass("passwords.txt");
+    QMessageBox invalidCreds;
     int compUsername, compPassword;
+    bool invalid = false;
+    invalidCreds.setText("The username or password entered is incorrect");
 
     if(!user.open(QIODevice::ReadOnly | QIODevice::Text) ||
        !pass.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -31,12 +34,14 @@ void LoginWindow::on_pushButton_login_clicked()
         if( (compUsername == 1) &&
             (compPassword == 1) )
         {
+            invalid = true;
             Menu* menuptr = new Menu(this);
             this->close();
             menuptr->show();
         }
     }
-    // Put QMessageBox saying that the credentials entered were incorrect try again
+    if(invalid == false)
+        invalidCreds.exec();
 }
 
 LoginWindow::~LoginWindow()
