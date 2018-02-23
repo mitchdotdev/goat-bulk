@@ -1,0 +1,39 @@
+1 gallon milk
+8.49
+1000
+Rye Bread
+5.79
+500
+Ground Beef
+8.86	
+500
+Pork Tenderloin
+19.25	
+300
+Shrek 2
+19.95
+100
+Jay Leno Collection DVDs
+39.95
+100
+The Alamo
+19.95
+100
+Most Basic DVD Player
+59.99	
+50
+EPSON Printer
+59.99
+200
+EPSON Printer Cart
+32.50
+1000
+Instant Coffee
+7.75
+2000
+Paper Shredder
+199.99
+100
+Envelops
+2.99
+1500
