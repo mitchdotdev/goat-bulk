@@ -71,8 +71,6 @@ void shopper::delShopper() {
 	cout << "Please enter the member to delete: ";
 	getline(cin, memberSearchingFor);
 
-	cout << "JK, this code isn't implemented yet.\n";
-
 	fin.open("warehouse shoppers.txt");
 	while(fin) {
 		getline(fin, temp);

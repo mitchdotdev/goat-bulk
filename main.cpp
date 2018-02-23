@@ -25,10 +25,10 @@ int main() {
 
 	addNewShopper(memNum);
 
-	//testInventory();
+	testInventory();
 	tempShopperTester();
-	//testSaveFile();
-	//salesInformation();
+	testSaveFile();
+	salesInformation();
 
 	return 0;
 }
