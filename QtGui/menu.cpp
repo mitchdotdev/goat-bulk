@@ -1,5 +1,6 @@
 #include "menu.h"
 #include "sales.h"
+#include "newsales.h"
 #include "ui_menu.h"
 #include <QMessageBox>
 #include <QComboBox>
@@ -29,9 +30,12 @@ Menu::~Menu()
 void Menu::on_combobox_selection_currentTextChanged(const QString &arg1) //Used for checking when an option is changed
 {
     if(arg1 == "Sales Information"){
-        Sales *salePtr = new Sales(this);
+        newSales *newSalesPtr = new newSales(this);
         this->close();
-        salePtr->show();
+        newSalesPtr->show();
+        /*Sales *salePtr = new Sales(this);
+        this->close();
+        salePtr->show();*/
 
     }
 

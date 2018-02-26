@@ -22,10 +22,10 @@ void salesinfo::printSalesInfo()
 {
     // sets for 2 decimals
     cout << fixed << setprecision(2);
-    cout << "Item Name:      "  << itemName     << endl;
-    cout << "Last Sale Date: "  << lastSale     << endl;
+    cout << "Item Name:       " << itemName     << endl;
+    cout << "Last Sale Date:  "  << lastSale     << endl;
     cout << "Price:          $" << price        << endl;
-    cout << "Quantity:       "  << quantity     << endl;
+    cout << "Quantity:        " << quantity     << endl;
     cout << "Total Revenue:  $" << totalRevenue << endl;
     cout << endl;
 }

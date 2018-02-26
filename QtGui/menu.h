@@ -1,8 +1,9 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include <QMainWindow>
 #include "salesinfo.h"
+#include "newsales.h"
+#include <QMainWindow>
 
 namespace Ui {
 

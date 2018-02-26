@@ -28,18 +28,21 @@ SOURCES += \
     loginwindow.cpp \
     salesinfo.cpp \
     menu.cpp \
-    sales.cpp
+    sales.cpp \
+    newsales.cpp
 
 HEADERS += \
     loginwindow.h \
     salesinfo.h \
     menu.h \
-    sales.h
+    sales.h \
+    newsales.h
 
 FORMS += \
     loginwindow.ui \
     menu.ui \
-    sales.ui
+    sales.ui \
+    newsales.ui
 
 RESOURCES += \
     menupicture.qrc

@@ -1,8 +1,8 @@
 #ifndef SALES_H
 #define SALES_H
 
+#include "menu.h"
 #include <QMainWindow>
-#include <menu.h>
 
 namespace Ui {
 class Sales;
@@ -17,7 +17,7 @@ public:
     ~Sales();
 
 private slots:
-    void on_comboBox_currentTextChanged(const QString &arg1);
+    //void on_comboBox_currentTextChanged(const QString &arg1);
     void on_pushButton_back_clicked();
 
 private:
